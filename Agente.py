@@ -83,6 +83,7 @@ class AgenteCocina:
             return {"accion": "esperar"}
         for ingrediente, cantidad in self.recetas[receta].items():
             if ingrediente not in self.almacen_ingredientes or self.almacen_ingredientes[ingrediente] < cantidad:
+                print("No se puede preparar la receta por falta de ingredientes")
                 return {"accion": "esperar"}
         return {"accion": "preparar_receta", "receta": receta}
 
@@ -91,6 +92,10 @@ class AgenteCocina:
         if receta not in self.recetas:
             print(f"La receta {receta} no está disponible en este momento.")
             return {"accion": "esperar"}
+        for ingrediente, cantidad in self.recetas[receta].items():
+            if ingrediente not in self.almacen_ingredientes or self.almacen_ingredientes[ingrediente] < cantidad:
+                print("No se puede preparar la receta por falta de ingredientes")
+                return {"accion": "esperar"}
         for ingrediente, cantidad in self.recetas[receta].items():
             self.almacen_ingredientes[ingrediente] -= cantidad
         return {"accion": "esperar"}
