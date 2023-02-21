@@ -20,6 +20,7 @@ class AgenteCocina:
             "preparar_receta": self.preparar_receta,
             "esperar": self.esperar,
             "ver_almacen_ingredientes": self.ver_almacen_ingredientes,
+            "ver_recetas": self.ver_recetas
         }
 
         self.percepciones = []
@@ -38,6 +39,9 @@ class AgenteCocina:
 
     def ver_almacen_ingredientes(self):
         return self.almacen_ingredientes
+
+    def ver_recetas(self):
+        return self.recetas
 
     def comprar_ingrediente(self):
         ingrediente = self.percepciones[-1]["ingrediente"]
@@ -111,7 +115,7 @@ agente = AgenteCocina()
 
 while True:
     accion = input(
-        "¿Qué acción desea realizar? (buscar_ingrediente, comprar_ingrediente, verificar_receta, preparar_receta, esperar, ver_almacen_ingredientes, salir): ")
+        "¿Qué acción desea realizar? (buscar_ingrediente, comprar_ingrediente, verificar_receta, ver_recetas, preparar_receta, esperar, ver_almacen_ingredientes, salir): ")
 
     if accion == "salir":
         break
@@ -133,6 +137,9 @@ while True:
 
     if accion == "preparar_receta":
         percepcion["receta"] = input("¿Que receta desea preparar?")
+
+    if accion == "ver_recetas":
+        agente.AGENTE({"accion": "ver_recetas"})
 
     if accion == "ver_almacen_ingredientes":
         agente.AGENTE({"accion": "ver_almacen_ingredientes"})
