@@ -1,0 +1,35 @@
+{
+    "almacen_ingredientes": {
+        "harina": 10,
+        "huevos": 6,
+        "leche": 3,
+        "azucar": 5
+    },
+    "recetas": {
+        "torta": {
+            "harina": 2,
+            "huevos": 2,
+            "leche": 1,
+            "azucar": 2
+        },
+        "panqueques": {
+            "harina": 1,
+            "huevos": 1,
+            "leche": 1
+        },
+        "huevo_frito": {
+            "huevos": 1
+        }
+    },
+    "acciones": {
+        "buscar_ingrediente": "self.buscar_ingrediente",
+        "comprar_ingrediente": "self.comprar_ingrediente",
+        "verificar_receta": "self.verificar_receta",
+        "preparar_receta": "self.preparar_receta",
+        "esperar": "self.esperar",
+        "ver_almacen_ingredientes": "self.ver_almacen_ingredientes",
+        "ver_recetas": "self.ver_recetas",
+        "crear_receta": "self.crear_receta"
+    },
+    "percepciones": []
+}
