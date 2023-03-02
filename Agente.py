@@ -1,5 +1,11 @@
+import json
+
+# Leer datos del archivo JSON
+with open('Agente.json', 'r') as f:
+    Agente = json.load(f)
+
 class AgenteCocina:
-    def __init__(self):
+    """def __init__(self):
         self.almacen_ingredientes = {
             "harina": 10,
             "huevos": 6,
@@ -24,7 +30,35 @@ class AgenteCocina:
             "crear_receta": self.crear_receta,
         }
 
-        self.percepciones = []
+        self.percepciones = [] """
+    
+    """ if "harina" in archivo_json["almacen_ingredientes"]:
+        # hacer algo si la clave existe
+    else:
+        # hacer algo si la clave no existe """
+    
+    """ try:
+        valor = archivo_json["almacen_ingredientes"]["azucar"]
+    except KeyError:
+        print("La clave 'azucar' no existe en el diccionario 'almacen_ingredientes'") """
+
+    """ ingredientes_torta = contenido_json['recetas']['torta']
+    print(ingredientes_torta)  # Imprime {"harina": 2, "huevos": 2, "leche": 1, "azucar": 2} """
+
+    """ cantidad_de_harina = contenido_json['almacen_ingredientes']['harina']
+    print(cantidad_de_harina)  # Imprime 10 """
+
+    # Leer archivo JSON
+    """ with open('datos.json', 'r') as archivo:
+        datos = json.load(archivo) """
+
+    # Agregar nuevo valor
+    # datos['profesion'] = 'Ingeniero'
+
+    # Escribir archivo JSON actualizado
+    """ with open('datos.json', 'w') as archivo:
+        json.dump(datos, archivo) """
+
 
     def AGENTE(self, percepcion):
         self.percepciones.append(percepcion)
@@ -103,40 +137,6 @@ class AgenteCocina:
     def esperar(self):
         return {"accion": "esperar"}
 
-
-# # Ejemplo de uso
-# agente = AgenteCocina()
-
-# print("Buscar ingredientes")
-# percepcion = {"accion": "buscar_ingrediente", "ingrediente": "harina"}
-# accion = agente.AGENTE(percepcion)
-# print(accion)  # {'accion': 'buscar_ingrediente', 'ingrediente': 'harina', 'cantidad': 1}
-
-# print("Verificar receta")
-# percepcion = {"accion": "verificar_receta", "receta": "torta"}
-# accion = agente.AGENTE(percepcion)
-# print(accion)  # {'accion': 'esperar'}
-
-# print("Comprar ingrediente")
-# percepcion = {"accion": "comprar_ingrediente", "ingrediente": "harina"}
-# accion = agente.AGENTE(percepcion)
-# print(accion) # {'accion': 'buscar_ingrediente', 'ingrediente': 'harina', 'cantidad': 5}
-
-# print("Buscar ingredientes (5 unidades)")
-# for i in range(5):
-#     percepcion = {"accion": "buscar_ingrediente", "ingrediente": "harina"}
-#     accion = agente.AGENTE(percepcion)
-#     print(accion) # {'accion': 'buscar_ingrediente', 'ingrediente': 'harina', 'cantidad': 1}
-
-# print("Verificar receta")
-# percepcion = {"accion": "verificar_receta", "receta": "torta"}
-# accion = agente.AGENTE(percepcion)
-# print(accion) # {'accion': 'esperar'}
-
-# print("Preparar receta")
-# percepcion = {"accion": "preparar_receta", "receta": "torta"}
-# accion = agente.AGENTE(percepcion)
-# print(accion) # {'accion': 'esperar'}
 
 agente = AgenteCocina()
 
