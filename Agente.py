@@ -4,6 +4,7 @@ import json
 with open('Agente.json', 'r') as f:
     Agente = json.load(f)
 
+
 class AgenteCocina:
     """def __init__(self):
         self.almacen_ingredientes = {
@@ -31,12 +32,12 @@ class AgenteCocina:
         }
 
         self.percepciones = [] """
-    
+
     """ if "harina" in archivo_json["almacen_ingredientes"]:
         # hacer algo si la clave existe
     else:
         # hacer algo si la clave no existe """
-    
+
     """ try:
         valor = archivo_json["almacen_ingredientes"]["azucar"]
     except KeyError:
@@ -59,7 +60,6 @@ class AgenteCocina:
     """ with open('datos.json', 'w') as archivo:
         json.dump(datos, archivo) """
 
-
     def AGENTE(self, percepcion):
         self.percepciones.append(percepcion)
         accion = self.acciones[percepcion["accion"]]()
@@ -67,11 +67,19 @@ class AgenteCocina:
 
     def buscar_ingrediente(self):
         ingrediente = self.percepciones[-1]["ingrediente"]
-        if ingrediente in self.almacen_ingredientes and self.almacen_ingredientes[ingrediente] > 0:
+        if ingrediente in Agente["almacen_ingredientes"]:
+            # hacer algo si la clave existe
+            return {"accion": "buscar_ingrediente", "ingrediente": ingrediente, "cantidad": self.almacen_ingredientes[ingrediente]}
+        else:
+            # hacer algo si la clave no existe
+            return {"accion": "comprar_ingrediente", "ingrediente": ingrediente}
+
+
+        """ if ingrediente in self.almacen_ingredientes and self.almacen_ingredientes[ingrediente] > 0:
             return {"accion": "buscar_ingrediente", "ingrediente": ingrediente, "cantidad": self.almacen_ingredientes[ingrediente]}
         else:
             return {"accion": "comprar_ingrediente", "ingrediente": ingrediente}
-
+ """
     def ver_almacen_ingredientes(self):
         for ingrediente, cantidad in self.almacen_ingredientes.items():
             print(f"{ingrediente}: {cantidad}")
