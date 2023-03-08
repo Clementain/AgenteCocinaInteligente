@@ -1,9 +1,9 @@
 import json
 
-# Leer datos del archivo JSON
+""" # Leer datos del archivo JSON
 with open('Agente.json', 'r') as f:
     Agente = json.load(f)
-
+ """
 
 class AgenteCocina:
     """def __init__(self):
@@ -59,27 +59,42 @@ class AgenteCocina:
     # Escribir archivo JSON actualizado
     """ with open('datos.json', 'w') as archivo:
         json.dump(datos, archivo) """
+    
+    #CONSTRUCTOR BONITO CON EL YEISON
+    def __init__(self):
+        with open("Agente.json", "r") as f:
+            conocimiento = json.load(f)
+        
+        self.almacen_ingredientes = conocimiento["almacen_ingredientes"]
+        self.acciones = conocimiento["acciones"]
+        self.recetas = conocimiento["recetas"]
+        self.percepciones = []
 
     def AGENTE(self, percepcion):
-        self.percepciones.append(percepcion)
+        """ self.percepciones.append(percepcion)
         accion = self.acciones[percepcion["accion"]]()
-        return accion
+        return accion() """
+        # Verificar que la acción de la percepción esté en el diccionario de acciones
+        if percepcion["accion"] not in self.acciones:
+            print(f"Acción inválida: {percepcion['accion']}")
+            return {"accion": "esperar"}
+        
+        # Verificar que la acción correspondiente sea una función definida en el agente
+        accion = self.acciones[percepcion["accion"]]
+        if not callable(accion):
+            print(f"Acción inválida: {percepcion['accion']}")
+            return {"accion": "esperar"}
+
+        # Llamar la función de la acción correspondiente
+        return accion()
 
     def buscar_ingrediente(self):
         ingrediente = self.percepciones[-1]["ingrediente"]
-        if ingrediente in Agente["almacen_ingredientes"]:
-            # hacer algo si la clave existe
-            return {"accion": "buscar_ingrediente", "ingrediente": ingrediente, "cantidad": self.almacen_ingredientes[ingrediente]}
-        else:
-            # hacer algo si la clave no existe
-            return {"accion": "comprar_ingrediente", "ingrediente": ingrediente}
-
-
-        """ if ingrediente in self.almacen_ingredientes and self.almacen_ingredientes[ingrediente] > 0:
+        if ingrediente in self.almacen_ingredientes and self.almacen_ingredientes[ingrediente] > 0:
             return {"accion": "buscar_ingrediente", "ingrediente": ingrediente, "cantidad": self.almacen_ingredientes[ingrediente]}
         else:
             return {"accion": "comprar_ingrediente", "ingrediente": ingrediente}
- """
+
     def ver_almacen_ingredientes(self):
         for ingrediente, cantidad in self.almacen_ingredientes.items():
             print(f"{ingrediente}: {cantidad}")
@@ -142,9 +157,9 @@ class AgenteCocina:
             self.almacen_ingredientes[ingrediente] -= cantidad
         return {"accion": "esperar"}
 
+
     def esperar(self):
         return {"accion": "esperar"}
-
 
 agente = AgenteCocina()
 
@@ -174,13 +189,13 @@ while True:
         percepcion["receta"] = input("¿Que receta desea preparar?")
 
     if accion == "ver_recetas":
-        agente.ver_recetas
+        getattr(agente, "ver_recetas")()
 
     if accion == "crear_receta":
         percepcion["receta"] = input("Nombre de la nueva receta: ")
 
     if accion == "ver_almacen_ingredientes":
-        agente.ver_almacen_ingredientes
+        getattr(agente, "ver_almacen_ingredientes")()
 
     resultado = agente.AGENTE(percepcion)
     print("El agente realizó la siguiente acción:", resultado)
